@@ -1,9 +1,8 @@
 document.getElementById('calculate').addEventListener('click', calculatePrice);
 
 function calculatePrice() {
-    let basePrice = 100; // Starting bid is $100
-
-    // Education selection
+    let basePrice = 100;
+    
     let educationFactor = {
         'bachelor': 1.5,
         'college': 1.2,
@@ -15,7 +14,6 @@ function calculatePrice() {
         basePrice *= educationFactor[education];
     }
 
-    // Family net worth selection
     let networthFactor = {
         'more_than_10000': 2,
         'between_5000_10000': 1.5,
@@ -26,7 +24,6 @@ function calculatePrice() {
         basePrice *= networthFactor[networth];
     }
 
-    // Caste selection
     let castePrice = {
         'brahmin': 100,
         'kshatriya': 50,
@@ -39,13 +36,11 @@ function calculatePrice() {
         basePrice += castePrice[caste];
     }
 
-    // Skills checkboxes
     if (document.getElementById('music').checked) basePrice += 10;
     if (document.getElementById('cook').checked) basePrice += 20;
     if (document.getElementById('easygoing').checked) basePrice += 15;
     if (document.getElementById('sing').checked) basePrice += 10;
 
-    // Age factor (radio buttons)
     let ageFactors = document.getElementsByName('age');
     ageFactors.forEach(age => {
         if (age.checked) {
@@ -53,11 +48,9 @@ function calculatePrice() {
         }
     });
 
-    // Reputation checkboxes
     if (document.getElementById('gossip_parents').checked) basePrice *= 0.85;
     if (document.getElementById('gossip_character').checked) basePrice *= 0.9;
     if (document.getElementById('general_gossip').checked) basePrice -= 20;
 
-    // Display the result
     document.getElementById('result').innerHTML = "Final Dowry Price: $" + basePrice.toFixed(2);
 }
